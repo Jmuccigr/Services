@@ -1,14 +1,11 @@
--- Script to take a selected bit of markdown and turn it into rtf, pasting it from the clipboard
+-- Script to take a selected bit of markdown and turn it into rtf. For Automator.
 
-on process(input)
-	set input to the quoted form of input
+on run (input)
+	set input to the quoted form of (input as string)
 	try
-		do shell script "echo " & input & " | /usr/local/bin/pandoc -s -t rtf | pbcopy"
-		tell application "System Events"
-			keystroke "v" using command down
-		end tell
+		return (do shell script "echo " & input & " | /usr/local/bin/pandoc -s -t rtf" as Çclass RTF È)
 		beep
 	on error errMsg
 		display alert "Error" message errMsg
 	end try
-end process
+end run
