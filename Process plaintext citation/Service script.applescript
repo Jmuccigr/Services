@@ -2,11 +2,7 @@ on run {input, parameters}
 	# Select the ruby that rbenv is using since it's not the Apple-installed one
 	set rubypath to (do shell script "/usr/local/bin/rbenv which ruby")
 	# It's a short ruby script, so let's just include it directly
-	set rbscript to "require 'anystyle'
-v1 = ARGV[0].dup
-v2 = v1.force_encoding(\"UTF-8\")
-print AnyStyle.parse(v2, format: :bibtex).to_s
-exit"
+	set rbscript to "require 'anystyle'\nv1 = ARGV[0].dup\nv2 = v1.force_encoding(\"UTF-8\")\nprint AnyStyle.parse(v2, format: :bibtex).to_s\nexit"
 	try
 		# Use this weird method to remove line breaks in text. This means just one cite per shot. I couldn't get
 		# anything else to remove \n. We're taking over the clipboard anyway.
