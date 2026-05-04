@@ -7,7 +7,7 @@ on run
 	set theTitle to the clipboard as Unicode text
 	set fixedTitle to (do shell script "echo " & quoted form of theTitle & " | tr  ' ' '+' ")
 	--set fixedTitle to (do shell script "a=`pbpaste`; echo $a | sed 's/ /+/g'") as Unicode text
-	set starts to {"https://u1lib.org/s/", "https://booksc.org/s/", "https://duckduckgo.com/?ia=web&q=", "https://www.worldcat.org/search?qt=worldcat_org_all&q=", "https://scholar.google.com/scholar?q=", "https://www.researchgate.net/search.Search.html?query=", "https://www.academia.edu/search?q=", "https://www.persee.fr/search?ta=article&q=", "https://www-jstor-org.ezproxy.amherst.edu/action/doBasicSearch?Query="}
+	set starts to {"https://duckduckgo.com/?ia=web&q=", "https://www.worldcat.org/search?qt=worldcat_org_all&q=", "https://scholar.google.com/scholar?q=", "https://www.researchgate.net/search.Search.html?query=", "https://www.academia.edu/search?q=", "https://www.persee.fr/search?ta=article&q=", "https://annas-archive.pk/search?q=", "https://www-jstor-org.ezproxy.amherst.edu/action/doBasicSearch?Query="}
 	
 	-- Make sure the browser is running. FireFox will open separate windows when it starts otherwise.
 	repeat until browserRunning is true
@@ -24,7 +24,7 @@ on run
 	end if
 	repeat with i from 1 to 2
 		try
-			do shell script ("open -a /Applications/" & browserName & ".app " & quote & item i of starts & theTitle & "?order=bestmatch" & quote)
+			do shell script ("open -a /Applications/" & browserName & ".app " & quote & item i of starts & theTitle & quote & "&orderBy=bestMatch")
 		on error errMsg number errNum
 			display alert "Error" message errMsg
 		end try
